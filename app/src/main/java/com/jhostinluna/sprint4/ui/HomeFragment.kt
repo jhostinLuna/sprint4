@@ -30,19 +30,19 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ) {
-        TODO("Not yet implemented")
+
     }
 
     override fun observeViewModel() {
-        TODO("Not yet implemented")
+
     }
 
     override fun viewCreatedAfterSetupObserverViewModel(view: View, savedInstanceState: Bundle?) {
-        TODO("Not yet implemented")
+
     }
 
     override fun configureToolbarAndConfigScreenSections() {
-        TODO("Not yet implemented")
+
     }
 
 }
