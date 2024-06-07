@@ -4,4 +4,16 @@
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="descriptionImagePerson">Imagen de una persona de la lista</string>
     <string name="labelButtonMore">Más</string>
+    <string name="hintName">Escribe tu nombre</string>
+    <string name="textVFavoriteColor">Color Favorito</string>
+    <string name="hintColor">Ingrese su color favorito</string>
+    <string name="textVDateBorn">Fecha de nacimiento</string>
+    <string name="hintDateBorn">Ingrese su fecha de nacimiento</string>
+    <string name="textCity">Ciudad favorita</string>
+    <string name="hintCity">Ingrese su ciudad favorita</string>
+    <string name="textFavoriteNumber">Número favorito</string>
+    <string name="hintFavoriteNumber">Ingrese su número favorito</string>
+    <string name="textName">Nombre</string>
+    <string name="buttonCalculateLocation">Calcular Localización</string>
+    <string name="buttonSave">Guardar</string>
 </resources>

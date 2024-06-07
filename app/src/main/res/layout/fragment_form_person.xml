@@ -1,14 +1,141 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".ui.FormPersonFragment">
 
-    <!-- TODO: Update blank fragment layout -->
     <TextView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="@string/hello_blank_fragment" />
+        android:id="@+id/textVName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textStyle="bold"
+        app:layout_constraintStart_toStartOf="@+id/editTName"
+        app:layout_constraintTop_toTopOf="parent"
+        android:layout_marginTop="12dp"
+        android:text="@string/textName" />
+    <EditText
+        android:layout_width="300dp"
+        android:layout_height="wrap_content"
+        android:id="@+id/editTName"
+        android:inputType="text"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/textVName"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginTop="6dp"
+        android:hint="@string/hintName"
+        android:labelFor="@+id/textViewName"
+        style="@style/CustomEditText"
+        android:importantForAutofill="no" />
+    <!--Color Favorite-->
+    <TextView
+        android:id="@+id/textVColor"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textStyle="bold"
+        app:layout_constraintTop_toBottomOf="@id/editTName"
+        app:layout_constraintStart_toStartOf="@id/editTName"
+        android:layout_marginTop="12dp"
+        android:text="@string/textVFavoriteColor" />
+    <EditText
+        android:id="@+id/editTColor"
+        android:layout_width="300dp"
+        android:layout_height="wrap_content"
+        android:inputType="text"
+        app:layout_constraintStart_toStartOf="@id/textVColor"
+        app:layout_constraintTop_toBottomOf="@id/textVColor"
+        android:layout_marginTop="6dp"
+        android:hint="@string/hintColor"
+        android:labelFor="@+id/textVColor"
+        android:autofillHints="name"
+        style="@style/CustomEditText"/>
+    <!--date was born-->
+    <TextView
+        android:id="@+id/textVDate"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintStart_toStartOf="@id/editTColor"
+        app:layout_constraintTop_toBottomOf="@id/editTColor"
+        android:layout_marginTop="12dp"
+        android:textStyle="bold"
+        android:text="@string/textVDateBorn" />
+    <EditText
+        android:id="@+id/editTDate"
+        android:layout_width="300dp"
+        android:layout_height="wrap_content"
+        android:inputType="date"
+        app:layout_constraintStart_toStartOf="@id/textVDate"
+        app:layout_constraintTop_toBottomOf="@id/textVDate"
+        android:layout_marginTop="6dp"
+        android:hint="@string/hintDateBorn"
+        android:labelFor="@+id/textVDate"
+        android:autofillHints="name"
+        style="@style/CustomEditText"/>
+    <!--City Favorite-->
+    <TextView
+        android:id="@+id/textVCity"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintStart_toStartOf="@id/editTDate"
+        app:layout_constraintTop_toBottomOf="@id/editTDate"
+        android:layout_marginTop="12dp"
+        android:textStyle="bold"
+        android:text="@string/textCity" />
+    <EditText
+        android:id="@+id/editTCity"
+        android:layout_width="300dp"
+        android:layout_height="wrap_content"
+        android:inputType="text"
+        app:layout_constraintStart_toStartOf="@id/textVCity"
+        app:layout_constraintTop_toBottomOf="@id/textVCity"
+        android:layout_marginTop="6dp"
+        android:hint="@string/hintCity"
+        android:labelFor="@+id/textVCity"
+        style="@style/CustomEditText"
+        android:importantForAutofill="no" />
+    <!--Number Favorite-->
+    <TextView
+        android:id="@+id/textVNumber"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintStart_toStartOf="@id/editTCity"
+        app:layout_constraintTop_toBottomOf="@id/editTCity"
+        android:layout_marginTop="12dp"
+        android:textStyle="bold"
+        android:text="@string/textFavoriteNumber" />
 
-</FrameLayout>
+    <EditText
+        android:id="@+id/editTNumber"
+        style="@style/CustomEditText"
+        android:inputType="number"
+        android:layout_width="300dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="6dp"
+        android:hint="@string/hintFavoriteNumber"
+        android:labelFor="@+id/textVNumber"
+        app:layout_constraintStart_toStartOf="@id/textVNumber"
+        app:layout_constraintTop_toBottomOf="@id/textVNumber"
+        android:importantForAutofill="no" />
+
+    <Button
+        android:id="@+id/buttonLocation"
+        android:layout_width="300dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="32dp"
+        android:text="@string/buttonCalculateLocation"
+        app:layout_constraintEnd_toEndOf="@+id/editTNumber"
+        app:layout_constraintStart_toStartOf="@+id/editTNumber"
+        app:layout_constraintTop_toBottomOf="@+id/editTNumber" />
+
+    <Button
+        android:id="@+id/buttonSave"
+        android:layout_width="300dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:text="@string/buttonSave"
+        app:layout_constraintEnd_toEndOf="@+id/buttonLocation"
+        app:layout_constraintStart_toStartOf="@+id/buttonLocation"
+        app:layout_constraintTop_toBottomOf="@+id/buttonLocation" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

@@ -12,7 +12,6 @@ import com.jhostinluna.sprint4.databinding.FragmentFormPersonBinding
 
 /**
  * A simple [Fragment] subclass.
- * Use the [FormPersonFragment.newInstance] factory method to
  * create an instance of this fragment.
  */
 class FormPersonFragment : BaseFragment<FragmentFormPersonBinding>() {
