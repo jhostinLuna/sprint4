@@ -14,7 +14,7 @@ import com.jhostinluna.sprint4.core.extensions.gone
 import com.jhostinluna.sprint4.core.extensions.visible
 import com.jhostinluna.sprint4.databinding.ActivityMainBinding
 import com.jhostinluna.sprint4.ui.DetailPersonFragment
-import com.jhostinluna.sprint4.ui.FormPersonFragment
+import com.jhostinluna.sprint4.ui.CreatePersonFragment
 import com.jhostinluna.sprint4.ui.HomeFragment
 import com.jhostinluna.sprint4.ui.MapCityFragment
 
@@ -60,7 +60,7 @@ class MainActivity : AppCompatActivity() {
                     nullable = false
                 }
             }
-            fragment<FormPersonFragment>(route = "form") {
+            fragment<CreatePersonFragment>(route = "create") {
                 label = "form for add one person"
             }
             fragment<MapCityFragment>(route = "map/{personID}") {

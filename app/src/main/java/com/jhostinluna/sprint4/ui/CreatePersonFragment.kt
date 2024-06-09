@@ -5,21 +5,20 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.navigation.fragment.findNavController
-import com.jhostinluna.sprint4.R
 import com.jhostinluna.sprint4.core.platform.BaseFragment
-import com.jhostinluna.sprint4.databinding.FragmentHomeBinding
-
+import com.jhostinluna.sprint4.databinding.FragmentCreatePersonBinding
 
 
 /**
  * A simple [Fragment] subclass.
  * create an instance of this fragment.
  */
-class HomeFragment : BaseFragment<FragmentHomeBinding>() {
+class CreatePersonFragment : BaseFragment<FragmentCreatePersonBinding>() {
+
+
 
     override fun inflateBinding() {
-        binding = FragmentHomeBinding.inflate(layoutInflater)
+        binding = FragmentCreatePersonBinding.inflate(layoutInflater)
     }
 
     override fun createViewAfterInflateBinding(
@@ -27,22 +26,15 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ) {
-        binding?.buttonAdd?.setOnClickListener {
-            val navController = findNavController()
-            navController.navigate(route = "create")
-        }
     }
 
     override fun observeViewModel() {
-
     }
 
     override fun viewCreatedAfterSetupObserverViewModel(view: View, savedInstanceState: Bundle?) {
-
     }
 
     override fun configureToolbarAndConfigScreenSections() {
-
     }
 
 }

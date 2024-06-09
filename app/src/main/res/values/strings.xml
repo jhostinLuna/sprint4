@@ -16,4 +16,5 @@
     <string name="textName">Nombre</string>
     <string name="buttonCalculateLocation">Calcular Localización</string>
     <string name="buttonSave">Guardar</string>
+    <string name="textSeeDetail">Ver Detalles</string>
 </resources>
