@@ -1,6 +1,8 @@
 plugins {
     alias(libs.plugins.androidApplication)
     alias(libs.plugins.jetbrainsKotlinAndroid)
+    id("kotlin-kapt")
+    alias(libs.plugins.daguerHilt)
 }
 
 android {
@@ -55,4 +57,17 @@ dependencies {
     implementation(libs.bundles.navigation)
     //NavHostFragment
     api(libs.androidx.navigation.fragment.ktx)
+    // Hilt
+    implementation(libs.hilt.core)
+    kapt(libs.hilt.compiler)
+    //Room
+
+    implementation(libs.androidx.room.runtime)
+    annotationProcessor(libs.androidx.room.compiler)
+
+    // To use Kotlin annotation processing tool (kapt)
+    kapt(libs.androidx.room.compiler)
+}
+kapt {
+    correctErrorTypes = true
 }
