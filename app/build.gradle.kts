@@ -65,8 +65,16 @@ dependencies {
     implementation(libs.androidx.room.runtime)
     annotationProcessor(libs.androidx.room.compiler)
 
+    //Coroutine Room
+    implementation(libs.androidx.room.room)
+
     // To use Kotlin annotation processing tool (kapt)
     kapt(libs.androidx.room.compiler)
+
+    //LifeCycleScope
+    implementation(libs.androidx.lifecycle.viewmodel.ktx)
+    implementation(libs.androidx.fragment.ktx)
+
 }
 kapt {
     correctErrorTypes = true

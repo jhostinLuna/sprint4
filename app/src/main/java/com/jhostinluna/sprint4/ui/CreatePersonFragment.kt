@@ -5,18 +5,24 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.fragment.app.viewModels
 import com.jhostinluna.sprint4.core.platform.BaseFragment
 import com.jhostinluna.sprint4.databinding.FragmentCreatePersonBinding
+import com.jhostinluna.sprint4.domain.model.person.PersonModel
+import dagger.hilt.android.AndroidEntryPoint
+import java.text.SimpleDateFormat
+import java.util.Locale
 
 
 /**
- * A simple [Fragment] subclass.
+ *
  * create an instance of this fragment.
  */
+@AndroidEntryPoint
 class CreatePersonFragment : BaseFragment<FragmentCreatePersonBinding>() {
 
 
-
+    private val viewModel: CreatePersonViewModel by viewModels()
     override fun inflateBinding() {
         binding = FragmentCreatePersonBinding.inflate(layoutInflater)
     }
@@ -26,6 +32,30 @@ class CreatePersonFragment : BaseFragment<FragmentCreatePersonBinding>() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ) {
+        setListeners()
+    }
+    private fun setListeners() {
+        binding?.let {bind->
+            bind?.buttonSave?.setOnClickListener {
+                if (bind.editTName.text.isNotEmpty()
+                    && bind.editTColor.text.isNotEmpty()
+                    && bind.editTCity.text.isNotEmpty()
+                    && bind.editTNumber.text.isNotEmpty()
+                    && bind.editTDate.text.isNotEmpty()
+                ){
+                    val simpleDateFormat = SimpleDateFormat ("dd/MM/yyyy", Locale.getDefault())
+
+                    viewModel.addPerson(personModel = PersonModel(
+                        name = bind.editTName.text.toString(),
+                        color = bind.editTColor.text.toString(),
+                        city = bind.editTCity.text.toString(),
+                        number = bind.editTNumber.text.toString().toInt(),
+                        dateBorn = simpleDateFormat.parse(bind.editTDate.text.toString())
+                    ))
+                }
+
+            }
+        }
     }
 
     override fun observeViewModel() {

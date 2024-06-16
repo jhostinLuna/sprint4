@@ -17,7 +17,9 @@ import com.jhostinluna.sprint4.ui.DetailPersonFragment
 import com.jhostinluna.sprint4.ui.CreatePersonFragment
 import com.jhostinluna.sprint4.ui.HomeFragment
 import com.jhostinluna.sprint4.ui.MapCityFragment
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class MainActivity : AppCompatActivity() {
 
     private lateinit var _binding: ActivityMainBinding

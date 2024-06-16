@@ -1,4 +1,4 @@
-package com.jhostinluna.sprint4.domain.model
+package com.jhostinluna.sprint4.domain.model.error
 
 class ErrorModel(
     var error: String = "unknow",
