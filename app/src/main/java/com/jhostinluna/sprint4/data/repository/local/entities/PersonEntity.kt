@@ -10,7 +10,7 @@ data class PersonEntity (
     @PrimaryKey(autoGenerate = true) val uid: Int? = null,
     val name: String,
     @ColumnInfo("favorite_color") val favoriteColor: String,
-    @ColumnInfo("date_born") val dateBorn: Date,
+    @ColumnInfo("date_born") val dateBorn: Date? = null,
     @ColumnInfo("favorite_city") val favoriteCity:String,
     @ColumnInfo("favorite_number") val favoriteNumber: Int,
     )

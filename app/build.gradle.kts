@@ -3,6 +3,7 @@ plugins {
     alias(libs.plugins.jetbrainsKotlinAndroid)
     id("kotlin-kapt")
     alias(libs.plugins.daguerHilt)
+    id("com.google.android.libraries.mapsplatform.secrets-gradle-plugin")
 }
 
 android {
@@ -74,7 +75,8 @@ dependencies {
     //LifeCycleScope
     implementation(libs.androidx.lifecycle.viewmodel.ktx)
     implementation(libs.androidx.fragment.ktx)
-
+    // Maps SDK for Android
+    implementation(libs.play.services.maps)
 }
 kapt {
     correctErrorTypes = true

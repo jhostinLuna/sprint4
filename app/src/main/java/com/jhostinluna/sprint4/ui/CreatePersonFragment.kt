@@ -36,7 +36,7 @@ class CreatePersonFragment : BaseFragment<FragmentCreatePersonBinding>() {
     }
     private fun setListeners() {
         binding?.let {bind->
-            bind?.buttonSave?.setOnClickListener {
+            bind.buttonSave.setOnClickListener {
                 if (bind.editTName.text.isNotEmpty()
                     && bind.editTColor.text.isNotEmpty()
                     && bind.editTCity.text.isNotEmpty()
