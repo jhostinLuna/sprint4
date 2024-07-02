@@ -1,53 +1,62 @@
 package com.jhostinluna.sprint4.ui
 
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import com.jhostinluna.sprint4.R
+import androidx.fragment.app.Fragment
+import com.google.android.gms.common.GooglePlayServicesNotAvailableException
+import com.google.android.gms.maps.CameraUpdateFactory
+import com.google.android.gms.maps.GoogleMap
+import com.google.android.gms.maps.MapsInitializer
+import com.google.android.gms.maps.OnMapReadyCallback
+import com.google.android.gms.maps.model.LatLng
+import com.google.android.gms.maps.model.MarkerOptions
 import com.jhostinluna.sprint4.core.platform.BaseFragment
 import com.jhostinluna.sprint4.databinding.FragmentMapCityBinding
 
 
+const val USER_ID_PARAMS = "userId"
 /**
  * A simple [Fragment] subclass.
- * Use the [MapCityFragment.newInstance] factory method to
  * create an instance of this fragment.
  */
-class MapCityFragment : BaseFragment<FragmentMapCityBinding>() {
-    // TODO: Rename and change types of parameters
-    private var param1: String? = null
-    private var param2: String? = null
-
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        arguments?.let {
-        }
-    }
-
+class MapCityFragment : BaseFragment<FragmentMapCityBinding>(), OnMapReadyCallback {
+    private var userId: String? = null
+    var mGoogleMap: GoogleMap? = null
+    var map: GoogleMap? = null
     override fun inflateBinding() {
-        TODO("Not yet implemented")
+        binding = FragmentMapCityBinding.inflate(layoutInflater)
     }
+
 
     override fun createViewAfterInflateBinding(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ) {
-        TODO("Not yet implemented")
+        val mapFragment = childFragmentManager.findFragmentById(binding?.fcvMap?.id!!) as com.google.android.gms.maps.SupportMapFragment
+        mapFragment.getMapAsync(this)
+
     }
 
     override fun observeViewModel() {
-        TODO("Not yet implemented")
     }
 
     override fun viewCreatedAfterSetupObserverViewModel(view: View, savedInstanceState: Bundle?) {
-        TODO("Not yet implemented")
     }
 
     override fun configureToolbarAndConfigScreenSections() {
-        TODO("Not yet implemented")
+
+    }
+
+    override fun onMapReady(googleMap: GoogleMap) {
+        googleMap.addMarker(
+            MarkerOptions()
+                .position(LatLng(0.0, 0.0))
+                .title("Marker")
+        )
+
     }
 
 }

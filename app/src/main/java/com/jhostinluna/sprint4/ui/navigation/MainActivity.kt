@@ -49,7 +49,7 @@ class MainActivity : AppCompatActivity() {
             .findFragmentById(R.id.navHostFragment) as NavHostFragment
         val navController = navHostFragment.navController
         navController.graph = navController.createGraph(
-            startDestination = "home"
+            startDestination = "map/0"
         ) {
             fragment<HomeFragment>("home") {
                 label = "List of Characters"
