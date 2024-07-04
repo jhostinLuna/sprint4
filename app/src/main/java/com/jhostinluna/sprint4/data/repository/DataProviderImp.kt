@@ -23,4 +23,8 @@ class DataProviderImp @Inject constructor(
         localDataSource.deletePerson(person)
     }
 
+    override fun getDetailPerson(id: Int): Flow<PersonModel> {
+        return localDataSource.getPersonById(id)
+    }
+
 }

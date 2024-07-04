@@ -19,6 +19,7 @@ import com.jhostinluna.sprint4.ui.HomeFragment
 import com.jhostinluna.sprint4.ui.MapCityFragment
 import dagger.hilt.android.AndroidEntryPoint
 
+const val ARG_PERSON_ID = "personID"
 @AndroidEntryPoint
 class MainActivity : AppCompatActivity() {
 
@@ -44,30 +45,41 @@ class MainActivity : AppCompatActivity() {
     fun showToolbarLayout() {
         binding.includeToolbar.toolbarMainactivity.visible()
     }
+    fun showToolbar(
+        title: String = "",
+    ) {
+        binding.includeToolbar.toolbarMainactivity.visible()
+        binding.includeToolbar.toolbarMainactivity.title = title
+    }
     private fun createGraphicDSL() {
         val navHostFragment = supportFragmentManager
             .findFragmentById(R.id.navHostFragment) as NavHostFragment
         val navController = navHostFragment.navController
         navController.graph = navController.createGraph(
-            startDestination = "home"
+            startDestination = Screen.Home.route
         ) {
-            fragment<HomeFragment>("home") {
+            fragment<HomeFragment>(Screen.Home.route) {
                 label = "List of Characters"
             }
-            fragment<DetailPersonFragment>(route = "detail/{personID}") {
+            fragment<DetailPersonFragment>(route = "${Screen.PersonDetail.route}/{$ARG_PERSON_ID}") {
                 label = "detail of Person"
-                argument("personID") {
+                argument(ARG_PERSON_ID) {
                     type = NavType.IntType
                     defaultValue = -1
                     nullable = false
                 }
             }
-            fragment<CreatePersonFragment>(route = "create") {
+            fragment<CreatePersonFragment>(route = "${Screen.AddPerson.route}/{$ARG_PERSON_ID}") {
                 label = "form for add one person"
+                argument(ARG_PERSON_ID) {
+                    type = NavType.IntType
+                    defaultValue = -1
+                    nullable = false
+                }
             }
-            fragment<MapCityFragment>(route = "map/{personID}") {
+            fragment<MapCityFragment>(route = "${Screen.MapCity.route}/{$ARG_PERSON_ID}") {
                 label = "Map for show location of city favorite"
-                argument("personID") {
+                argument(ARG_PERSON_ID) {
                     type = NavType.IntType
                     defaultValue = -1
                     nullable = false

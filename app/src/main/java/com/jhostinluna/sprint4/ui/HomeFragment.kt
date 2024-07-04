@@ -15,6 +15,7 @@ import com.jhostinluna.sprint4.core.platform.BaseFragment
 import com.jhostinluna.sprint4.databinding.FragmentHomeBinding
 import com.jhostinluna.sprint4.databinding.ItemPersonRecyclerviewBinding
 import com.jhostinluna.sprint4.ui.adapters.ListPersonAdapter
+import com.jhostinluna.sprint4.ui.navigation.Screen
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
 
@@ -67,7 +68,7 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>() {
     }
     private fun setListeners() {
         binding?.buttonAdd?.setOnClickListener {
-            findNavController().navigate(route = "create")
+            findNavController().navigate(route = "${Screen.AddPerson.route}/-1")
         }
 
 

@@ -17,4 +17,8 @@
     <string name="buttonCalculateLocation">Calcular Localización</string>
     <string name="buttonSave">Guardar</string>
     <string name="textSeeDetail">Ver Detalles</string>
+    <string name="home_fragment">Personas</string>
+    <string name="create_person_fragment">Añadir Persona</string>
+    <string name="person_detail_fragment">Detalle</string>
+    <string name="map_city_fragment">Mapa de ciudad</string>
 </resources>

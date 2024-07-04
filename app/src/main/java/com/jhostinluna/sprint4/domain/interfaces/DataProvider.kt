@@ -11,5 +11,6 @@ interface DataProvider {
 
     fun deletePerson(person: PersonModel): Unit
 
+    fun getDetailPerson(id: Int): Flow<PersonModel>
 
 }

@@ -22,6 +22,13 @@ class MapCityFragment : BaseFragment<FragmentMapCityBinding>(), OnMapReadyCallba
     private var userId: String? = null
     var mGoogleMap: GoogleMap? = null
     var map: GoogleMap? = null
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        arguments?.let {
+            userId = it.getString(USER_ID_PARAMS)
+        }
+    }
     override fun inflateBinding() {
         binding = FragmentMapCityBinding.inflate(layoutInflater)
     }

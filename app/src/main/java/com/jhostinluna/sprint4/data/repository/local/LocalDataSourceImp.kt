@@ -32,4 +32,9 @@ class LocalDataSourceImp @Inject constructor(
         personDAO.delete(mapper.fromResponse(personModel))
     }
 
+    override fun getPersonById(id: Int): Flow<PersonModel> = personDAO.getById(id).map {
+        val mapper = GetPersonsMapper()
+        mapper.fromResponse(it)
+    }
+
 }

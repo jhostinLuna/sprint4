@@ -1,5 +1,6 @@
 package com.jhostinluna.sprint4.ui
 
+import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.viewModelScope
 import com.jhostinluna.sprint4.core.platform.BaseViewModel
 import com.jhostinluna.sprint4.domain.model.person.PersonModel
@@ -13,22 +14,8 @@ import javax.inject.Inject
 
 @HiltViewModel
 class HomeViewModel @Inject constructor(
-    private val getPersonsUseCase: GetPersonUseCase
-): BaseViewModel() {
-    private val _personListMutableStatFlow: MutableStateFlow<List<PersonModel>> = MutableStateFlow<List<PersonModel>>(
-        emptyList()
-    )
-    val personListMutableStatFlow: StateFlow<List<PersonModel>> = _personListMutableStatFlow
+    savedStateHandle: SavedStateHandle,
+    getPersonsUseCase: GetPersonUseCase
+): BaseViewModel(savedStateHandle,getPersonsUseCase) {
 
-    init {
-        getPersonList()
-    }
-    fun getPersonList() {
-        viewModelScope.launch(Dispatchers.IO) {
-            getPersonsUseCase().collect() {
-                _personListMutableStatFlow.value = it
-            }
-        }
-
-    }
 }

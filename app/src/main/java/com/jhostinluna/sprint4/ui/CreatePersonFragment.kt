@@ -1,6 +1,7 @@
 package com.jhostinluna.sprint4.ui
 
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -9,6 +10,7 @@ import androidx.fragment.app.viewModels
 import com.jhostinluna.sprint4.core.platform.BaseFragment
 import com.jhostinluna.sprint4.databinding.FragmentCreatePersonBinding
 import com.jhostinluna.sprint4.domain.model.person.PersonModel
+import com.jhostinluna.sprint4.ui.navigation.ARG_PERSON_ID
 import dagger.hilt.android.AndroidEntryPoint
 import java.text.SimpleDateFormat
 import java.util.Locale
@@ -21,8 +23,16 @@ import java.util.Locale
 @AndroidEntryPoint
 class CreatePersonFragment : BaseFragment<FragmentCreatePersonBinding>() {
 
-
+    private var personIdParam: Int? = null
     private val viewModel: CreatePersonViewModel by viewModels()
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        arguments?.let {
+            personIdParam = it.getInt(ARG_PERSON_ID)
+        }
+        Log.d("prueba",personIdParam.toString())
+    }
     override fun inflateBinding() {
         binding = FragmentCreatePersonBinding.inflate(layoutInflater)
     }

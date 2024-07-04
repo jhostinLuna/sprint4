@@ -5,24 +5,29 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.fragment.app.viewModels
+import androidx.lifecycle.lifecycleScope
+import androidx.navigation.fragment.findNavController
 import com.jhostinluna.sprint4.core.platform.BaseFragment
 import com.jhostinluna.sprint4.databinding.FragmentDetailPersonBinding
+import com.jhostinluna.sprint4.domain.model.person.PersonModel
+import com.jhostinluna.sprint4.ui.navigation.ARG_PERSON_ID
+import com.jhostinluna.sprint4.ui.navigation.Screen
+import kotlinx.coroutines.launch
 
 
-private const val PERSON_ID = "personID"
 /**
  * A simple [Fragment] subclass.
- * Use the [DetailPersonFragment.newInstance] factory method to
  * create an instance of this fragment.
  */
 class DetailPersonFragment : BaseFragment<FragmentDetailPersonBinding>() {
 
     private var personIdParam: String? = null
-
+    private val viewModel: DetailPersonViewModel by viewModels()
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         arguments?.let {
-            personIdParam = it.getString(PERSON_ID)
+            personIdParam = it.getString(ARG_PERSON_ID)
         }
     }
 
@@ -36,19 +41,44 @@ class DetailPersonFragment : BaseFragment<FragmentDetailPersonBinding>() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ) {
-        TODO("Not yet implemented")
+        initListeners()
+    }
+    private fun initListeners() {
+        binding?.buttonSeeDetail?.setOnClickListener {
+            findNavController().navigate(route = "${Screen.MapCity.route}/${personIdParam}")
+        }
+    }
+    private fun updateUI(person: PersonModel) {
+        binding?.apply {
+            itemPersonCity.binding.textVNameValue.text = person.name
+            itemPersonColor.binding.textVNameValue.text = person.color
+            itemPersonCity.binding.textVNameValue.text = person.city
+            // hay formatear fecha que se encuentra en milisegundos en Base de datos local
+            itemPersonDateBorn.binding.textVNameValue.text = person.dateBorn.toString()
+        }
+
     }
 
     override fun observeViewModel() {
-        TODO("Not yet implemented")
+        lifecycleScope.launch {
+            viewModel.personMutableStateFlow.collect {person->
+                person?.let {
+                    updateUI(person)
+                }
+            }
+        }
     }
 
     override fun viewCreatedAfterSetupObserverViewModel(view: View, savedInstanceState: Bundle?) {
-        TODO("Not yet implemented")
+        personIdParam?.toInt()?.let { id->
+            viewModel.loadDetailPerson(id)
+        }
+
     }
 
     override fun configureToolbarAndConfigScreenSections() {
-        TODO("Not yet implemented")
+        fragmentLayoutWithToolbar()
+        showToolbar("Detalle")
     }
 
 }

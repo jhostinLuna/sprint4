@@ -38,6 +38,19 @@ abstract class BaseFragment<B : ViewBinding>: Fragment() {
         configureToolbarAndConfigScreenSections()
     }
 
+    fun fragmentLayoutWithToolbar() {
+        mainActivity.showToolbarLayout()
+    }
+    fun hideToolbar() {
+        mainActivity.hideToolbarLayout()
+    }
+    fun showToolbar(
+        title: String = "",
+    ) {
+        mainActivity.showToolbar(
+            title = title,
+        )
+    }
     abstract fun inflateBinding()
     abstract fun createViewAfterInflateBinding(
         inflater: LayoutInflater,

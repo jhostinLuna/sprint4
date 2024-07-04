@@ -19,4 +19,7 @@ interface PersonDAO {
 
     @Delete
     fun delete(person: PersonEntity)
+    @Query("SELECT * FROM persons WHERE uid = :id")
+    fun getById(id: Int): Flow<PersonEntity>
+
 }
