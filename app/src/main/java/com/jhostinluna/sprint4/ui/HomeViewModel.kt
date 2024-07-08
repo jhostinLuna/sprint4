@@ -14,8 +14,19 @@ import javax.inject.Inject
 
 @HiltViewModel
 class HomeViewModel @Inject constructor(
-    savedStateHandle: SavedStateHandle,
-    getPersonsUseCase: GetPersonUseCase
-): BaseViewModel(savedStateHandle,getPersonsUseCase) {
+    private val getPersonsUseCase: GetPersonUseCase
+): BaseViewModel() {
+    private val _personListMutableStatFlow: MutableStateFlow<List<PersonModel>> = MutableStateFlow<List<PersonModel>>(
+        emptyList()
+    )
+    val personListMutableStatFlow: StateFlow<List<PersonModel>> = _personListMutableStatFlow
 
+    fun getPersonList() {
+        viewModelScope.launch(Dispatchers.IO) {
+            getPersonsUseCase().collect() {
+                _personListMutableStatFlow.value = it
+            }
+        }
+
+    }
 }

@@ -14,7 +14,7 @@ interface PersonDAO {
     @Query("SELECT * FROM persons")
     fun getAll(): Flow<List<PersonEntity>>
 
-    @Insert(onConflict = OnConflictStrategy.IGNORE)
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
     fun insertAll(vararg persons: PersonEntity)
 
     @Delete

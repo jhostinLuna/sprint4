@@ -21,4 +21,5 @@
     <string name="create_person_fragment">Añadir Persona</string>
     <string name="person_detail_fragment">Detalle</string>
     <string name="map_city_fragment">Mapa de ciudad</string>
+    <string name="actionEditPerson">Editar</string>
 </resources>

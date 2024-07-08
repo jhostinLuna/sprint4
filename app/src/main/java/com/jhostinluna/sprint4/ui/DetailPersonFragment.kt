@@ -1,6 +1,7 @@
 package com.jhostinluna.sprint4.ui
 
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -13,6 +14,7 @@ import com.jhostinluna.sprint4.databinding.FragmentDetailPersonBinding
 import com.jhostinluna.sprint4.domain.model.person.PersonModel
 import com.jhostinluna.sprint4.ui.navigation.ARG_PERSON_ID
 import com.jhostinluna.sprint4.ui.navigation.Screen
+import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
 
 
@@ -20,14 +22,17 @@ import kotlinx.coroutines.launch
  * A simple [Fragment] subclass.
  * create an instance of this fragment.
  */
+@AndroidEntryPoint
 class DetailPersonFragment : BaseFragment<FragmentDetailPersonBinding>() {
 
-    private var personIdParam: String? = null
+    private var personIdParam: Int? = null
     private val viewModel: DetailPersonViewModel by viewModels()
+
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         arguments?.let {
-            personIdParam = it.getString(ARG_PERSON_ID)
+            personIdParam = it.getInt(ARG_PERSON_ID)
         }
     }
 
@@ -50,11 +55,12 @@ class DetailPersonFragment : BaseFragment<FragmentDetailPersonBinding>() {
     }
     private fun updateUI(person: PersonModel) {
         binding?.apply {
-            itemPersonCity.binding.textVNameValue.text = person.name
+            itemPersonName.binding.textVNameValue.text = person.name
             itemPersonColor.binding.textVNameValue.text = person.color
             itemPersonCity.binding.textVNameValue.text = person.city
             // hay formatear fecha que se encuentra en milisegundos en Base de datos local
             itemPersonDateBorn.binding.textVNameValue.text = person.dateBorn.toString()
+            itemPersonNumber.binding.textVNameValue.text = person.number.toString()
         }
 
     }
@@ -62,6 +68,7 @@ class DetailPersonFragment : BaseFragment<FragmentDetailPersonBinding>() {
     override fun observeViewModel() {
         lifecycleScope.launch {
             viewModel.personMutableStateFlow.collect {person->
+                Log.d("DetailPersonFragment", "observeViewModel: $person")
                 person?.let {
                     updateUI(person)
                 }
@@ -70,7 +77,7 @@ class DetailPersonFragment : BaseFragment<FragmentDetailPersonBinding>() {
     }
 
     override fun viewCreatedAfterSetupObserverViewModel(view: View, savedInstanceState: Bundle?) {
-        personIdParam?.toInt()?.let { id->
+        personIdParam?.let { id->
             viewModel.loadDetailPerson(id)
         }
 
@@ -78,7 +85,11 @@ class DetailPersonFragment : BaseFragment<FragmentDetailPersonBinding>() {
 
     override fun configureToolbarAndConfigScreenSections() {
         fragmentLayoutWithToolbar()
-        showToolbar("Detalle")
+        showToolbar("Detalle",true)
     }
 
+    override fun onclickEditIcon() {
+        super.onclickEditIcon()
+        findNavController().navigate("${Screen.AddPerson.route}/$personIdParam")
+    }
 }

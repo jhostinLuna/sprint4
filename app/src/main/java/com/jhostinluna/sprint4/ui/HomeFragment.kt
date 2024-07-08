@@ -6,14 +6,11 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.viewModels
-import androidx.lifecycle.coroutineScope
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.jhostinluna.sprint4.R
 import com.jhostinluna.sprint4.core.platform.BaseFragment
 import com.jhostinluna.sprint4.databinding.FragmentHomeBinding
-import com.jhostinluna.sprint4.databinding.ItemPersonRecyclerviewBinding
 import com.jhostinluna.sprint4.ui.adapters.ListPersonAdapter
 import com.jhostinluna.sprint4.ui.navigation.Screen
 import dagger.hilt.android.AndroidEntryPoint
@@ -55,12 +52,12 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>() {
             }
         }
         personListAdapter.onClickListener = {id->
-            findNavController().navigate(route = "detail/$id")
+            findNavController().navigate(route = "${Screen.PersonDetail.route}/$id")
         }
     }
 
     override fun viewCreatedAfterSetupObserverViewModel(view: View, savedInstanceState: Bundle?) {
-
+        viewModel.getPersonList()
     }
 
     override fun configureToolbarAndConfigScreenSections() {

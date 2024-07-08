@@ -6,7 +6,5 @@ import com.jhostinluna.sprint4.domain.usecases.GetPersonUseCase
 import javax.inject.Inject
 
 class MapCityViewModel @Inject constructor(
-    savedStateHandle: SavedStateHandle,
-    getPersonUseCase: GetPersonUseCase
-): BaseViewModel(savedStateHandle,getPersonUseCase) {
+): BaseViewModel() {
 }

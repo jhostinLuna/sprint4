@@ -25,11 +25,19 @@ class ListPersonAdapter: RecyclerView.Adapter<ListPersonAdapter.PersonViewHolder
     override fun onBindViewHolder(holder: PersonViewHolder, position: Int) {
         holder.person = persons[position]
         holder.bind()
+        holder.initListeners()
     }
     inner class PersonViewHolder(private val binding: ItemPersonRecyclerviewBinding): ViewHolder(binding.root) {
         var person:PersonModel? = null
         fun bind() {
             binding.textViewName.text = person?.name
+        }
+        fun initListeners() {
+            binding.root.setOnClickListener {
+                person?.id?.let {id ->
+                    onClickListener(id)
+                }
+            }
         }
     }
 }
