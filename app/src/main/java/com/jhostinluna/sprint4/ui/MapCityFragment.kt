@@ -51,6 +51,7 @@ class MapCityFragment : BaseFragment<FragmentMapCityBinding>(), OnMapReadyCallba
     }
 
     override fun configureToolbarAndConfigScreenSections() {
+        showToolbar(showEditIcon = false)
 
     }
 

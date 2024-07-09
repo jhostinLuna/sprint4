@@ -11,6 +11,7 @@ import androidx.lifecycle.lifecycleScope
 import com.jhostinluna.sprint4.core.platform.BaseFragment
 import com.jhostinluna.sprint4.databinding.FragmentCreatePersonBinding
 import com.jhostinluna.sprint4.domain.model.person.PersonModel
+import com.jhostinluna.sprint4.ui.dialogs.DatePickerFragment
 import com.jhostinluna.sprint4.ui.navigation.ARG_PERSON_ID
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
@@ -47,6 +48,14 @@ class CreatePersonFragment : BaseFragment<FragmentCreatePersonBinding>() {
     }
     private fun setListeners() {
         binding?.let {bind->
+            bind.editTDate.setOnClickListener {
+                showDatePickerDialog(object : DatePickerFragment.DatePickerListener {
+                    override fun onDateSelected(year: Int, month: Int, day: Int) {
+                        bind.editTDate.setText("$day/$month/$year")
+                    }
+
+                })
+            }
             bind.buttonSave.setOnClickListener {
                 if (bind.editTName.text.isNotEmpty()
                     && bind.editTColor.text.isNotEmpty()

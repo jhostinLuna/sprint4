@@ -13,4 +13,5 @@ data class PersonEntity (
     @ColumnInfo("date_born") val dateBorn: Date? = null,
     @ColumnInfo("favorite_city") val favoriteCity:String,
     @ColumnInfo("favorite_number") val favoriteNumber: Int,
+    @ColumnInfo("coordinates") val coordinates: String = ""
     )

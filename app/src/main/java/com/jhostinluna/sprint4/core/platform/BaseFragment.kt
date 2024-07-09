@@ -7,6 +7,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.viewbinding.ViewBinding
+import com.jhostinluna.sprint4.ui.dialogs.DatePickerFragment
 import com.jhostinluna.sprint4.ui.navigation.MainActivity
 
 abstract class BaseFragment<B : ViewBinding>: Fragment(), MainActivity.ToolbarListener {
@@ -54,6 +55,9 @@ abstract class BaseFragment<B : ViewBinding>: Fragment(), MainActivity.ToolbarLi
             title = title,
             showEditIcon = showEditIcon
         )
+    }
+    fun showDatePickerDialog(datePickerListener: DatePickerFragment.DatePickerListener) {
+        mainActivity.showDatePickerDialog(datePickerListener)
     }
     abstract fun inflateBinding()
     abstract fun createViewAfterInflateBinding(

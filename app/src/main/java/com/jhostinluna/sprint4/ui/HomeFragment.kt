@@ -61,7 +61,6 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>() {
     }
 
     override fun configureToolbarAndConfigScreenSections() {
-
     }
     private fun setListeners() {
         binding?.buttonAdd?.setOnClickListener {

@@ -1,12 +1,10 @@
 package com.jhostinluna.sprint4.ui.navigation
 
 import android.os.Bundle
-import android.util.Log
 import android.view.Menu
 import android.view.MenuItem
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
-import androidx.appcompat.widget.Toolbar
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import androidx.navigation.NavController
@@ -15,17 +13,16 @@ import androidx.navigation.createGraph
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.fragment.fragment
 import androidx.navigation.ui.AppBarConfiguration
-import androidx.navigation.ui.onNavDestinationSelected
 import androidx.navigation.ui.setupWithNavController
 import com.jhostinluna.sprint4.R
 import com.jhostinluna.sprint4.core.extensions.gone
 import com.jhostinluna.sprint4.core.extensions.visible
-import com.jhostinluna.sprint4.core.platform.BaseFragment
 import com.jhostinluna.sprint4.databinding.ActivityMainBinding
 import com.jhostinluna.sprint4.ui.DetailPersonFragment
 import com.jhostinluna.sprint4.ui.CreatePersonFragment
 import com.jhostinluna.sprint4.ui.HomeFragment
 import com.jhostinluna.sprint4.ui.MapCityFragment
+import com.jhostinluna.sprint4.ui.dialogs.DatePickerFragment
 import dagger.hilt.android.AndroidEntryPoint
 
 const val ARG_PERSON_ID = "personID"
@@ -34,6 +31,7 @@ class MainActivity : AppCompatActivity() {
     private lateinit var navController: NavController
     private lateinit var _binding: ActivityMainBinding
     var toolbarListener: ToolbarListener? = null
+    val datePickerDialog: DatePickerFragment = DatePickerFragment()
     private val binding
         get() = _binding
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -143,6 +141,13 @@ class MainActivity : AppCompatActivity() {
             }
             else -> return false
         }
+    }
+    fun showDatePickerDialog(datePickerListener: DatePickerFragment.DatePickerListener) {
+        if (supportFragmentManager.findFragmentByTag("datePicker") == null ) {
+            datePickerDialog.show(supportFragmentManager, "datePicker")
+            datePickerDialog.setDatePickerListeners(listener = datePickerListener)
+        }
+
     }
     interface ToolbarListener {
         fun onclickEditIcon()
