@@ -31,7 +31,7 @@ class MainActivity : AppCompatActivity() {
     private lateinit var navController: NavController
     private lateinit var _binding: ActivityMainBinding
     var toolbarListener: ToolbarListener? = null
-    val datePickerDialog: DatePickerFragment = DatePickerFragment()
+    private val datePickerDialog: DatePickerFragment = DatePickerFragment()
     private val binding
         get() = _binding
     override fun onCreate(savedInstanceState: Bundle?) {

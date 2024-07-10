@@ -4,6 +4,11 @@ plugins {
     id("kotlin-kapt")
     alias(libs.plugins.daguerHilt)
     id("com.google.android.libraries.mapsplatform.secrets-gradle-plugin")
+    // Add the Google services Gradle plugin
+    id("com.google.gms.google-services")
+    // Add the Crashlytics Gradle plugin
+    id("com.google.firebase.crashlytics")
+
 }
 
 android {
@@ -49,6 +54,7 @@ dependencies {
     implementation(libs.material)
     implementation(libs.androidx.activity)
     implementation(libs.androidx.constraintlayout)
+    implementation(libs.play.services.location)
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
@@ -77,6 +83,13 @@ dependencies {
     implementation(libs.androidx.fragment.ktx)
     // Maps SDK for Android
     implementation(libs.play.services.maps)
+    //Firebase Boom
+    implementation(platform("com.google.firebase:firebase-bom:33.1.1"))
+    // TODO: Add the dependencies for Firebase products you want to use
+    // When using the BoM, don't specify versions in Firebase dependencies
+    implementation("com.google.firebase:firebase-analytics")
+    implementation("com.google.firebase:firebase-crashlytics")
+
 }
 kapt {
     correctErrorTypes = true

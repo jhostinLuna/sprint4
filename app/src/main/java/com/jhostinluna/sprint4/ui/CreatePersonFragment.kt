@@ -1,13 +1,16 @@
 package com.jhostinluna.sprint4.ui
 
+import android.content.pm.PackageManager
 import android.os.Bundle
 import android.util.Log
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
+import androidx.activity.result.contract.ActivityResultContracts
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
+import com.jhostinluna.sprint4.core.extensions.checkLocationPermission
 import com.jhostinluna.sprint4.core.platform.BaseFragment
 import com.jhostinluna.sprint4.databinding.FragmentCreatePersonBinding
 import com.jhostinluna.sprint4.domain.model.person.PersonModel
@@ -26,9 +29,19 @@ import java.util.Locale
 @AndroidEntryPoint
 class CreatePersonFragment : BaseFragment<FragmentCreatePersonBinding>() {
 
+
     private lateinit var personIdParam: Integer
     private val viewModel: CreatePersonViewModel by viewModels()
-
+    private val requestPermissionLauncher = registerForActivityResult(
+        ActivityResultContracts.RequestPermission()
+    ) { isGranted: Boolean ->
+        if (isGranted) {
+            Log.d("prueba", "onCreateView: tiene permiso")
+            viewModel.getLocation()
+        } else {
+            Log.d("prueba", "onCreateView: no tiene permiso")
+        }
+    }
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         arguments?.let {
@@ -65,7 +78,7 @@ class CreatePersonFragment : BaseFragment<FragmentCreatePersonBinding>() {
                 ){
                     val simpleDateFormat = SimpleDateFormat ("dd/MM/yyyy", Locale.getDefault())
 
-                    viewModel.addPerson(personModel = PersonModel(
+                    viewModel.setPersonModel(personModel = PersonModel(
                         id = if(personIdParam.toInt() > -1) personIdParam.toInt() else null,
                         name = bind.editTName.text.toString(),
                         color = bind.editTColor.text.toString(),
@@ -73,8 +86,18 @@ class CreatePersonFragment : BaseFragment<FragmentCreatePersonBinding>() {
                         number = bind.editTNumber.text.toString().toInt(),
                         dateBorn = simpleDateFormat.parse(bind.editTDate.text.toString())
                     ))
+                    viewModel.addPerson()
                 }
 
+            }
+            bind.buttonLocation.setOnClickListener {
+                if (verifyLocationPermission()) {
+                    Log.d("prueba", "verifyLocationPermission: tiene permiso")
+                    viewModel.getLocation()
+                } else {
+                    Log.d("prueba", "verifyLocationPermission: no tiene permiso")
+                    requestPermissionLauncher.launch(android.Manifest.permission.ACCESS_COARSE_LOCATION)
+                }
             }
         }
     }
@@ -86,6 +109,11 @@ class CreatePersonFragment : BaseFragment<FragmentCreatePersonBinding>() {
                 person?.let {
                     updateUI(person)
                 }
+            }
+        }
+        lifecycleScope.launch {
+            viewModel.locationMutableStateFlow.collect {
+                Toast.makeText(context, "¡Ubicación obtenida con exito!", Toast.LENGTH_SHORT).show()
             }
         }
     }
@@ -104,11 +132,14 @@ class CreatePersonFragment : BaseFragment<FragmentCreatePersonBinding>() {
             }
         }
     }
+    private fun verifyLocationPermission(): Boolean = context?.checkLocationPermission() == PackageManager.PERMISSION_GRANTED
 
     override fun viewCreatedAfterSetupObserverViewModel(view: View, savedInstanceState: Bundle?) {
         if (personIdParam > -1) {
             viewModel.loadDetailPerson(personIdParam.toInt())
         }
+
+
     }
 
     override fun configureToolbarAndConfigScreenSections() {

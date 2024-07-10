@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "1076252546824",
+    "project_id": "sprint4-fa912",
+    "storage_bucket": "sprint4-fa912.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1076252546824:android:7346afd2c4a2dc241b7ebd",
+        "android_client_info": {
+          "package_name": "com.jhostinluna.sprint4"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDmuIP4Hl-PhPRKNeOIAK4Zz6L55psx9F8"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

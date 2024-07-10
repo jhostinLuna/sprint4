@@ -2,6 +2,8 @@ package com.jhostinluna.sprint4.core.di
 
 import android.content.Context
 import androidx.room.Room
+import com.google.android.gms.location.FusedLocationProviderClient
+import com.google.android.gms.location.LocationServices
 import com.jhostinluna.sprint4.R
 import com.jhostinluna.sprint4.data.repository.DataProviderImp
 import com.jhostinluna.sprint4.data.repository.LocalDataSource
@@ -30,6 +32,11 @@ object DataModule {
     }
     @Provides
     fun getPersonDao(dataBase: AppDataBase): PersonDAO = dataBase.personDAO()
+
+    @Provides
+    fun provideFusedLocation(@ApplicationContext context: Context): FusedLocationProviderClient {
+        return LocationServices.getFusedLocationProviderClient(context)
+    }
 }
 
 @Module
