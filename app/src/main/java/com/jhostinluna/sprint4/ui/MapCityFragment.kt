@@ -19,7 +19,6 @@ import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
 
 
-const val USER_ID_PARAMS = "userId"
 /**
  * A simple [Fragment] subclass.
  * create an instance of this fragment.

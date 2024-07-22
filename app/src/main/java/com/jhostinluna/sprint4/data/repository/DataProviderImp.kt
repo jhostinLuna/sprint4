@@ -1,7 +1,6 @@
 package com.jhostinluna.sprint4.data.repository
 
 import android.location.Address
-import com.jhostinluna.sprint4.data.repository.local.entities.PersonEntity
 import com.jhostinluna.sprint4.data.repository.remote.GeocoderDataSource
 import com.jhostinluna.sprint4.domain.interfaces.DataProvider
 import com.jhostinluna.sprint4.domain.model.person.PersonModel
