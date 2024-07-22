@@ -10,6 +10,7 @@ class GetPersonsMapper: ResponseMapper<PersonEntity,PersonModel> {
         color = response.favoriteColor,
         number = response.favoriteNumber,
         city = response.favoriteCity,
-        dateBorn = response.dateBorn
+        dateBorn = response.dateBorn,
+        coordinate = response.coordinates
     )
 }

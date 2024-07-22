@@ -50,7 +50,7 @@ class DetailPersonFragment : BaseFragment<FragmentDetailPersonBinding>() {
     }
     private fun initListeners() {
         binding?.buttonSeeDetail?.setOnClickListener {
-            findNavController().navigate(route = "${Screen.MapCity.route}/${personIdParam}")
+                    findNavController().navigate(route = "${Screen.MapCity.route}/${personIdParam}")
         }
     }
     private fun updateUI(person: PersonModel) {

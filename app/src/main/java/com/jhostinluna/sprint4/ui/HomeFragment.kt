@@ -9,6 +9,9 @@ import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.google.firebase.Firebase
+import com.google.firebase.analytics.FirebaseAnalytics
+import com.google.firebase.analytics.analytics
 import com.jhostinluna.sprint4.core.platform.BaseFragment
 import com.jhostinluna.sprint4.databinding.FragmentHomeBinding
 import com.jhostinluna.sprint4.ui.adapters.ListPersonAdapter
@@ -23,12 +26,14 @@ import kotlinx.coroutines.launch
  */
 @AndroidEntryPoint
 class HomeFragment : BaseFragment<FragmentHomeBinding>() {
-
+    private lateinit var firebaseAnalytics: FirebaseAnalytics
     private lateinit var personListAdapter: ListPersonAdapter
     private val viewModel: HomeViewModel by viewModels()
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         personListAdapter = ListPersonAdapter()
+        // Obtain the FirebaseAnalytics instance.
+        firebaseAnalytics = Firebase.analytics
     }
 
     override fun inflateBinding() {
@@ -52,6 +57,12 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>() {
             }
         }
         personListAdapter.onClickListener = {id->
+            firebaseAnalytics.logEvent(FirebaseAnalytics.Event.SELECT_ITEM, Bundle().apply {
+                putInt(FirebaseAnalytics.Param.ITEM_ID, id)
+                putString(FirebaseAnalytics.Param.ITEM_NAME, "Person")
+                putString(FirebaseAnalytics.Param.CONTENT_TYPE, "image")
+            }
+            )
             findNavController().navigate(route = "${Screen.PersonDetail.route}/$id")
         }
     }

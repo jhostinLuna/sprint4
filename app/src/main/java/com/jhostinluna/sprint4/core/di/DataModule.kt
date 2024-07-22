@@ -1,6 +1,7 @@
 package com.jhostinluna.sprint4.core.di
 
 import android.content.Context
+import android.location.Geocoder
 import androidx.room.Room
 import com.google.android.gms.location.FusedLocationProviderClient
 import com.google.android.gms.location.LocationServices
@@ -36,6 +37,11 @@ object DataModule {
     @Provides
     fun provideFusedLocation(@ApplicationContext context: Context): FusedLocationProviderClient {
         return LocationServices.getFusedLocationProviderClient(context)
+    }
+
+    @Provides
+    fun getGeocoder(@ApplicationContext context: Context): Geocoder {
+        return Geocoder(context)
     }
 }
 
